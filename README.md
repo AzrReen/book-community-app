@@ -8,9 +8,5 @@ Nor Azreen Binti Asari 2217638
 ## UI Mockup
 ## Architecture / Technical Design
 ## Data Model
-## Application Flow
-## Packages & Plugins Used
-## Firebase Integration
-## Screenshots (Final)
-## Limitations & Future Enhancements
+## Flowchart/ Sequence Diagram
 ## References
