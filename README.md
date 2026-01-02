@@ -2,7 +2,7 @@
 ## Group Members
 1. Nor Azreen Binti Asari (2217638)
 2. Nur Irdina binti Abd Rahman (2213414)
-3. 
+3. Nur Alifah Ilyana Binti Mohd Zaman (2217466)
 
 ## Introduction
 Biblioo is a mobile application designed to provide readers with a unified platform to buy and sell physical books while engaging in a social reading community. The application combines a peer-to-peer book marketplace with a community feed where users can share book reviews, recommendations, and reading experiences.
@@ -31,6 +31,24 @@ Biblioo is designed for a wide range of book enthusiasts, including:
 The application is suitable for users who prefer a mobile-based solution that combines both e-commerce and social networking features in a single, easy-to-use system.
 
 ## Features & Functionalities
+1. User Management & Authentication
+- Firebase Auth: Support for Email/Password and Google Sign-in.
+- User Profiles: Customizable profiles showing the user's "Bookshelf" (listings), "Read List" (reviews), and follower count.
+
+2. Marketplace (P2P Commerce)
+- Smart Listing: A form to upload book images (Firebase Storage), title, ISBN, condition, and price.
+- Search & Filter: Category-based browsing (e.g., Fiction, Textbooks, Sci-Fi) and keyword search.
+- Wishlist: Save books to a "Favorites" list for future purchase.
+
+3. Community & Social Feed
+- Dynamic Feed: A scrollable timeline of book reviews and "Bookstagram" style photos.
+- Interactions: Users can like, comment, and share posts.
+- Book Reviews: A dedicated post type with star ratings and "Currently Reading" status updates.
+
+4. Communication System
+- Real-time Chat: Integrated Firestore-based messaging between buyers and sellers.
+- Push Notifications: Alerts for new messages, price drops on wishlisted books, or social interactions (Cloud Messaging).
+
 ## UI Mockup
 ## Architecture / Technical Design
 ## Data Model
