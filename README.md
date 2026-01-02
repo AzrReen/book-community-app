@@ -56,6 +56,7 @@ Application Architecture
 The application is structured into three main layers:
 1. Presentation Layer (UI Layer)
 This layer handles all user-facing components and interactions. It consists of Flutter widgets that represent screens such as authentication, marketplace listings, book details, community feed, and chat screens.
+
 Key responsibilities:
 - Rendering UI components using Flutter widgets
 - Handling user input through forms and buttons
@@ -64,6 +65,7 @@ Key responsibilities:
 
 2. Application Logic Layer (Controller / State Management)
 This layer manages the business logic and application state. It acts as a bridge between the UI and Firebase services.
+
 Key responsibilities:
 - Managing authentication state (logged in / logged out)
 - Handling marketplace logic such as creating listings, saving wishlists, and filtering books
