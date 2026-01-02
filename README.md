@@ -57,27 +57,27 @@ The application is structured into three main layers:
 1. Presentation Layer (UI Layer)
 This layer handles all user-facing components and interactions. It consists of Flutter widgets that represent screens such as authentication, marketplace listings, book details, community feed, and chat screens.
 Key responsibilities:
-Rendering UI components using Flutter widgets
-Handling user input through forms and buttons
-Navigating between screens using route-based navigation
-Displaying real-time updates from Firestore streams
+- Rendering UI components using Flutter widgets
+- Handling user input through forms and buttons
+- Navigating between screens using route-based navigation
+- Displaying real-time updates from Firestore streams
 
 2. Application Logic Layer (Controller / State Management)
 This layer manages the business logic and application state. It acts as a bridge between the UI and Firebase services.
 Key responsibilities:
-Managing authentication state (logged in / logged out)
-Handling marketplace logic such as creating listings, saving wishlists, and filtering books
-Managing social interactions such as likes, comments, and post creation
-Controlling chat message flow and conversation state
+- Managing authentication state (logged in / logged out)
+- Handling marketplace logic such as creating listings, saving wishlists, and filtering books
+- Managing social interactions such as likes, comments, and post creation
+- Controlling chat message flow and conversation state
 State management is handled using Provider, which allows shared application state (e.g. current user, listings, feed data) to be accessed efficiently across widgets without excessive rebuilding.
 
 3. Backend & Services Layer (Firebase)
 Firebase provides all backend services required by the application, reducing the need for a custom server.
 Firebase services used:
-Firebase Authentication for secure user login (Email/Password and Google Sign-In)
-Cloud Firestore as the primary NoSQL database for users, books, posts, chats, and interactions
-Firebase Storage for storing book images and post media
-Firebase Cloud Messaging (FCM) for push notifications related to messages, wishlist updates, and social interactions
+- Firebase Authentication for secure user login (Email/Password and Google Sign-In)
+- Cloud Firestore as the primary NoSQL database for users, books, posts, chats, and interactions
+- Firebase Storage for storing book images and post media
+- Firebase Cloud Messaging (FCM) for push notifications related to messages, wishlist updates, and social interactions
 This architecture ensures real-time synchronization, supports peer-to-peer interactions, and allows the application to scale as the number of users grows.
 ## Data Model
 
