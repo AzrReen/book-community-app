@@ -55,8 +55,7 @@ Biblioo is developed as a hybrid mobile application using Flutter, following a c
 Application Architecture
 The application is structured into three main layers:
 1. Presentation Layer (UI Layer)
-This layer handles all user-facing components and interactions. It consists of Flutter widgets that represent screens such as authentication, marketplace listings, book details, community feed, and chat screens.
-
+This layer handles all user-facing components and interactions. It consists of Flutter widgets that represent screens such as authentication, marketplace listings, book details, community feed, and chat screens. <br>
 Key responsibilities:
 - Rendering UI components using Flutter widgets
 - Handling user input through forms and buttons
@@ -64,8 +63,7 @@ Key responsibilities:
 - Displaying real-time updates from Firestore streams
 
 2. Application Logic Layer (Controller / State Management)
-This layer manages the business logic and application state. It acts as a bridge between the UI and Firebase services.
-
+This layer manages the business logic and application state. It acts as a bridge between the UI and Firebase services. <br>
 Key responsibilities:
 - Managing authentication state (logged in / logged out)
 - Handling marketplace logic such as creating listings, saving wishlists, and filtering books
@@ -74,7 +72,7 @@ Key responsibilities:
 State management is handled using Provider, which allows shared application state (e.g. current user, listings, feed data) to be accessed efficiently across widgets without excessive rebuilding.
 
 3. Backend & Services Layer (Firebase)
-Firebase provides all backend services required by the application, reducing the need for a custom server.
+Firebase provides all backend services required by the application, reducing the need for a custom server. <br>
 Firebase services used:
 - Firebase Authentication for secure user login (Email/Password and Google Sign-In)
 - Cloud Firestore as the primary NoSQL database for users, books, posts, chats, and interactions
