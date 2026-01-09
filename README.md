@@ -51,8 +51,7 @@ The application is suitable for users who prefer a mobile-based solution that co
 
 ## UI Mockup
 ## Architecture / Technical Design
-Biblioo is developed as a hybrid mobile application using Flutter, following a client–backend architecture with Firebase as the backend-as-a-service (BaaS). The architecture is designed to separate concerns between the user interface, application logic, and data services to ensure maintainability and scalability.
-Application Architecture
+Biblioo is developed as a hybrid mobile application using Flutter, following a client–backend architecture with Firebase as the backend-as-a-service (BaaS). The architecture is designed to separate concerns between the user interface, application logic, and data services to ensure maintainability and scalability. <br>
 The application is structured into three main layers:
 1. Presentation Layer (UI Layer)
 This layer handles all user-facing components and interactions. It consists of Flutter widgets that represent screens such as authentication, marketplace listings, book details, community feed, and chat screens. <br>
@@ -78,8 +77,91 @@ Firebase services used:
 - Cloud Firestore as the primary NoSQL database for users, books, posts, chats, and interactions
 - Firebase Storage for storing book images and post media
 - Firebase Cloud Messaging (FCM) for push notifications related to messages, wishlist updates, and social interactions
+  
 This architecture ensures real-time synchronization, supports peer-to-peer interactions, and allows the application to scale as the number of users grows.
-## Data Model
 
+## Data Model
+Biblioo uses Cloud Firestore, a NoSQL document-based database. Data is organized into collections and documents, designed to support marketplace, social, and messaging features efficiently.
+
+1. Users Collection (users) <br>
+Stores user profile and account-related information.
+
+Fields:
+- userId (String)
+- name (String)
+- email (String)
+- profileImageUrl (String)
+- bio (String)
+- followersCount (Number)
+- followingCount (Number)
+- createdAt (Timestamp)
+
+2. Books Collection (books) <br>
+Stores all book listings created by users for sale.
+
+Fields:
+- bookId (String)
+- sellerId (String, reference to users)
+- title (String)
+- author (String)
+- isbn (String)
+- category (String)
+- condition (String)
+- price (Number)
+- description (String)
+- imageUrls (Array of Strings)
+- status (String: available / sold)
+- createdAt (Timestamp)
+
+3. Wishlist Collection (wishlists) <br>
+Stores books that users have saved for future reference.
+
+Fields:
+- wishlistId (String)
+- userId (String)
+- bookId (String)
+- createdAt (Timestamp)
+
+4. Posts Collection (posts) <br>
+Stores community feed content such as reviews, recommendations, and reading updates.
+
+Fields:
+- postId (String)
+- userId (String)
+- postType (String: review / recommendation / status)
+- content (String)
+- rating (Number, optional)
+- imageUrl (String, optional)
+- likesCount (Number)
+- createdAt (Timestamp)
+
+5. Comments Collection (comments) <br>
+Stores comments on community posts.
+
+Fields:
+- commentId (String)
+- postId (String)
+- userId (String)
+- content (String)
+- createdAt (Timestamp)
+
+6. Chats Collection (chats) <br>
+Represents chat sessions between buyers and sellers.
+
+Fields:
+- chatId (String)
+- participants (Array of userIds)
+- bookId (String)
+- lastMessage (String)
+- updatedAt (Timestamp)
+
+7. Messages Subcollection (chats/{chatId}/messages)  <br>
+Stores individual chat messages within a chat session.
+
+Fields:
+- messageId (String)
+- senderId (String)
+- messageText (String)
+- createdAt (Timestamp)
 ## Flowchart/ Sequence Diagram
 ## References
