@@ -50,6 +50,11 @@ The application is suitable for users who prefer a mobile-based solution that co
 - Push Notifications: Alerts for new messages, price drops on wishlisted books, or social interactions (Cloud Messaging).
 
 ## UI Mockup
+1. User Profile Screen
+2. Book Marketplace Screen
+   
+4. Community Screen
+   
 ## Architecture / Technical Design
 Biblioo is developed as a hybrid mobile application using Flutter, following a client–backend architecture with Firebase as the backend-as-a-service (BaaS). The architecture is designed to separate concerns between the user interface, application logic, and data services to ensure maintainability and scalability. <br>
 The application is structured into three main layers:
