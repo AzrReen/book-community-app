@@ -52,7 +52,7 @@ The application is suitable for users who prefer a mobile-based solution that co
 ## UI Mockup
 1. User Profile Screen
 2. Book Marketplace Screen <br>
-   ![Marketplace Homescreen](path/to/image.png)
+   ![Marketplace Homescreen](images/mktPlace.png)
 4. Community Screen
    
 ## Architecture / Technical Design
@@ -169,4 +169,8 @@ Fields:
 - messageText (String)
 - createdAt (Timestamp)
 ## Flowchart/ Sequence Diagram
+## Final UI Screenshots
+## Summary of achieved features
+## Technical explanation
+## Limitations and future enhancements
 ## References
