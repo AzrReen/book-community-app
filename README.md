@@ -51,8 +51,8 @@ The application is suitable for users who prefer a mobile-based solution that co
 
 ## UI Mockup
 1. User Profile Screen
-2. Book Marketplace Screen
-   
+2. Book Marketplace Screen <br>
+   ![Marketplace Homescreen](path/to/image.png)
 4. Community Screen
    
 ## Architecture / Technical Design
