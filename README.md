@@ -170,6 +170,11 @@ Fields:
 - createdAt (Timestamp)
 ## Flowchart/ Sequence Diagram
 ## Final UI Screenshots
+1. Profile
+2. Marketplace <br>
+![Marketplace Homescreen](images/mktPlace.png)
+4. Community and Chat
+   
 ## Summary of achieved features
 ## Technical explanation
 ## Limitations and future enhancements
