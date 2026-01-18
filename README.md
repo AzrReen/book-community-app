@@ -172,9 +172,26 @@ Fields:
 ## Final UI Screenshots
 1. Profile
 2. Marketplace <br>
-<img src="images/final screens/marketplace/Mkt_homescreen.jpg" width="30%" />
-<img src="images/final screens/marketplace/detail_book.jpg" width="30%" />
-<img src="images/final screens/marketplace/edit_book.jpg" width="30%" />
+<figure>
+<img src="images/final screens/marketplace/Mkt_homescreen.jpg" width="30%" alt="Homescreen"/>
+   <figcaption>Marketplace Homescreen</figcaption>
+</figure>
+
+<figure>
+<img src="images/final screens/marketplace/detail_book.jpg" width="30%" alt="Homescreen"/>
+  <figcaption>Book Details</figcaption>
+</figure>
+
+<figure>
+<img src="images/final screens/marketplace/edit_book.jpg" width="30%" alt="Homescreen"/>
+  <figcaption>Edit Book Details</figcaption>
+</figure>
+
+<figure>
+<img src="images/final screens/marketplace/add_book.jpg" width="30%" alt="Homescreen"/>
+  <figcaption>Add New Book</figcaption>
+</figure>
+
 4. Community and Chat
    
 ## Summary of achieved features
