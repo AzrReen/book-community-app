@@ -307,71 +307,51 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _pickImage(BuildContext context) async {
-    try {
-      // Use file_picker instead of image_picker for better Windows support
-      final result = await FilePicker.platform.pickFiles(
-        type: FileType.image,
-        allowMultiple: false,
-      );
+    Future<void> _pickImage(BuildContext context) async {
+      try {
+        final result = await FilePicker.platform.pickFiles(type: FileType.image);
 
-      if (result == null || result.files.isEmpty) return;
+        if (result == null || result.files.isEmpty) return;
+        if (!context.mounted) return;
 
-      if (!context.mounted) return;
-
-      // Show loading
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) => const Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-
-      final authProvider = context.read<AuthProvider>();
-      
-      dynamic imageFile;
-      if (kIsWeb) {
-        imageFile = result.files.first.bytes;
-      } else {
-        // For desktop/mobile - read the file bytes
-        final file = File(result.files.first.path!);
-        imageFile = await file.readAsBytes();
-      }
-
-      final success = await authProvider.updateProfile(profileImage: imageFile);
-
-      if (!context.mounted) return;
-
-      // Close loading dialog
-      Navigator.pop(context);
-
-      if (success) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Profile picture updated!')),
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (_) => const Center(child: CircularProgressIndicator()),
         );
-      } else {
+
+        final authProvider = context.read<AuthProvider>();
+
+        dynamic imageFile;
+        if (kIsWeb) {
+          imageFile = result.files.first.bytes;
+        } else {
+          imageFile = File(result.files.first.path!);
+        }
+
+        final success = await authProvider.updateProfile(profileImage: imageFile);
+
+        if (!context.mounted) return;
+        Navigator.of(context, rootNavigator: true).pop();
+
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(authProvider.errorMessage ?? 'Failed to update picture'),
-            backgroundColor: Colors.red,
+            content: Text(success
+                ? 'Profile picture updated!'
+                : authProvider.errorMessage ?? 'Failed to update picture'),
+            backgroundColor: success ? null : Colors.red,
           ),
         );
+      } catch (e) {
+        if (context.mounted) {
+          Navigator.of(context, rootNavigator: true).pop();
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error: $e'), backgroundColor: Colors.red),
+          );
+        }
       }
-    } catch (e) {
-      if (!context.mounted) return;
-      
-      // Close loading dialog if open
-      Navigator.of(context, rootNavigator: true).pop();
-      
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Error: $e'),
-          backgroundColor: Colors.red,
-        ),
-      );
     }
-  }
+
 
   Future<void> _removePhoto(BuildContext context) async {
     // TODO: Implement photo removal
