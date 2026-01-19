@@ -17,94 +17,74 @@ class BiblioApp extends StatelessWidget {
   }
 }
 
-class CommunityFeedScreen extends StatelessWidget {
-  const CommunityFeedScreen({super.key});
+class UpcomingEventsScreen extends StatelessWidget {
+  const UpcomingEventsScreen({super.key});
 
-  // Color Palette from Design
-  final Color primaryTeal = const Color(0xFF537D82);
-  final Color statusRed = const Color(0xFF8C4A43);
-  final Color interactionTeal = const Color(0xFF42919B);
+  final Color bark = const Color(0xFF41302C);
+  final Color fjord = const Color(0xFF54737D);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: primaryTeal,
-        leading: const Icon(Icons.arrow_back, color: Colors.white),
-        title: const Text("Community Feed", style: TextStyle(color: Colors.white, fontSize: 18)),
-        actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert, color: Colors.white)),
-        ],
+        backgroundColor: bark,
+        title: const Text("Upcoming Events", style: TextStyle(color: Colors.white)),
+        centerTitle: true,
+        elevation: 0,
       ),
       body: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: const EdgeInsets.all(16),
         children: [
-          // 1. Status Update / Currently Reading Post
-          _buildStatusPost(),
-          
-          const SizedBox(height: 12),
-
-          // 2. Book Review Post
-          _buildReviewPost(
-            userName: "BookReviewPost",
-            reviewText: "Just finished 'The Midnight Library'. A mind-bending coffee, cozy blanket, and starting this roads not taken.",
-            bookTitle: "The Midnight Library",
-            author: "Matt Haig",
-            rating: 5,
-            likes: 20,
+          _buildEventCard(
+            context,
+            title: "Book Launch – In Safe Hands",
+            time: "02:00 PM – 04:00 PM",
+            location: "MPH TRX",
+            imagePath: 'https://via.placeholder.com/300x150', // Replace with your asset
           ),
-
-          const SizedBox(height: 12),
-
-          // 3. Bookstagram Style Photo Post
-          _buildReviewPost(
-            userName: "BookstagramPost",
-            reviewText: "Sunday matlyfey through: The wind incensbel, but it's woidgewihttit body today!",
-            bookTitle: "Dune 2",
-            author: "Frank Herbert",
-            rating: 4,
-            likes: 20,
+          const SizedBox(height: 16),
+          _buildEventCard(
+            context,
+            title: "The Dance Of Life by Dr. Wong Keh Shin",
+            time: "02:00 PM – 04:00 PM",
+            location: "MPH TRX",
+            imagePath: 'https://via.placeholder.com/300x150', // Replace with your asset
           ),
-          
-          const SizedBox(height: 12),
-
-          // 4. Simple User Post
-          _buildSimpleUserPost("ReokishBob", "required Title Medium"),
         ],
       ),
-      //bottomNavigationBar: _buildBottomNav(),
     );
   }
 
-  Widget _buildStatusPost() {
-    return Card(
-      elevation: 0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
+  Widget _buildEventCard(BuildContext context, {required String title, required String time, required String location, required String imagePath}) {
+    return GestureDetector(
+      onTap: () => _showEventPopup(context, title, time, location),
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        elevation: 4,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("BibloiphibeBetty", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-            const SizedBox(height: 4),
-            const Text("Just finished 'The Midnight Library' A mind-bending thaakes all you ponde not taken. Highly recommend!"),
-            const SizedBox(height: 12),
-            Row(
-              children: [
-                const Icon(Icons.book, color: Colors.grey, size: 20),
-                const SizedBox(width: 8),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                  decoration: BoxDecoration(color: interactionTeal, borderRadius: BorderRadius.circular(15)),
-                  child: const Text("19", style: TextStyle(color: Colors.white, fontSize: 12)),
-                ),
-                const Spacer(),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                  decoration: BoxDecoration(color: statusRed, borderRadius: BorderRadius.circular(15)),
-                  child: const Text("Currently Reading", style: TextStyle(color: Colors.white, fontSize: 12)),
-                ),
-              ],
+            ClipRRect(
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
+              child: Container(
+                height: 180,
+                width: double.infinity,
+                color: Colors.grey[300],
+                child: const Icon(Icons.image, size: 50), // Image placeholder
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  const SizedBox(height: 8),
+                  _buildIconText(Icons.access_time, time),
+                  const SizedBox(height: 4),
+                  _buildIconText(Icons.location_on, location),
+                ],
+              ),
             )
           ],
         ),
@@ -112,78 +92,50 @@ class CommunityFeedScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildReviewPost({required String userName, required String reviewText, required String bookTitle, required String author, required int rating, required int likes}) {
-    return Card(
-      elevation: 0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(userName, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-            const SizedBox(height: 10),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(4),
-                  child: Container(color: Colors.grey[300], width: 60, height: 90, child: const Icon(Icons.book)),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(reviewText, style: const TextStyle(fontSize: 13), maxLines: 3, overflow: TextOverflow.ellipsis),
-                      const SizedBox(height: 8),
-                      Text("Book Title: $bookTitle", style: const TextStyle(fontSize: 12, color: Colors.grey)),
-                      Text("Author: $author", style: const TextStyle(fontSize: 12, color: Colors.grey)),
-                      const SizedBox(height: 4),
-                      _buildStars(rating),
-                      const SizedBox(height: 2),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          _buildStars(5), // Secondary interaction/rating
-                          const SizedBox(width: 8),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                            decoration: BoxDecoration(color: interactionTeal, borderRadius: BorderRadius.circular(12)),
-                            child: Text("$likes", style: const TextStyle(color: Colors.white, fontSize: 11)),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                )
-              ],
+  Widget _buildIconText(IconData icon, String text) {
+    return Row(
+      children: [
+        Icon(icon, size: 16, color: Colors.grey[600]),
+        const SizedBox(width: 5),
+        Text(text, style: TextStyle(color: Colors.grey[600], fontSize: 13)),
+      ],
+    );
+  }
+
+  // THE POPUP FUNCTION
+  void _showEventPopup(BuildContext context, String title, String time, String location) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: Text(title, style: TextStyle(color: bark, fontWeight: FontWeight.bold)),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text("Would you like to register for this event?"),
+              const SizedBox(height: 15),
+              _buildIconText(Icons.calendar_today, "Save to Calendar"),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text("Close"),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: fjord),
+              onPressed: () {
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Registered Successfully!")),
+                );
+              },
+              child: const Text("Register", style: TextStyle(color: Colors.white)),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildStars(int count) {
-    return Row(
-      children: List.generate(5, (index) => Icon(
-        Icons.star, 
-        size: 14, 
-        color: index < count ? Colors.orange : Colors.grey[300]
-      )),
-    );
-  }
-
-  Widget _buildSimpleUserPost(String name, String sub) {
-    return Card(
-      elevation: 0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: ListTile(
-        leading: const CircleAvatar(backgroundColor: Colors.grey, child: Icon(Icons.person, color: Colors.white)),
-        title: Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
-        subtitle: Text(sub),
-      ),
+        );
+      },
     );
   }
 }
@@ -203,7 +155,7 @@ class _MainNavigationWrapperState extends State<MainNavigationWrapper> {
   final List<Widget> _pages = [
     const Center(child: Text("Shop")),
     const Center(child: Text("Library")),
-    const CommunityFeedScreen(),
+    const UpcomingEventsScreen(),
     const ChatListScreen(), 
     const Center(child: Text("Profile")),
   ];
@@ -263,9 +215,9 @@ class ChatListScreen extends StatelessWidget {
           Expanded(
             child: ListView(
               children: [
-                _buildChatTile("BibloiphibeBetty", "Loved your review on The Midnight Library!", "2m ago", true),
-                _buildChatTile("ReokishBob", "Do you have the physical copy of Dune?", "1h ago", false),
-                _buildChatTile("ReokishRita", "Sent a photo", "Yesterday", false),
+                _buildChatTile(context, "BibloiphibeBetty", "Loved your review...", "2m ago", true),
+                _buildChatTile(context, "ReokishBob", "Do you have the physical copy...", "1h ago", false),
+                _buildChatTile(context, "ReokishRita", "Sent a photo", "Yesterday", false),
               ],
             ),
           ),
@@ -274,7 +226,7 @@ class ChatListScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildChatTile(String name, String message, String time, bool isUnread) {
+  Widget _buildChatTile(BuildContext context, String name, String message, String time, bool isUnread) {
     return ListTile(
       leading: const CircleAvatar(backgroundColor: Colors.grey, radius: 25, child: Icon(Icons.person, color: Colors.white)),
       title: Text(name, style: TextStyle(fontWeight: isUnread ? FontWeight.bold : FontWeight.normal)),
@@ -287,51 +239,174 @@ class ChatListScreen extends StatelessWidget {
         ],
       ),
       onTap: () {
-        // Navigate to actual chat room logic here
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ChatPage(userName: name)),
+        );
       },
     );
   }
 }
 
-// --- COMMUNITY FEED SCREEN (Simplified for brevity) ---
-// class CommunityFeedScreen extends StatelessWidget {
-//   const CommunityFeedScreen({super.key});
-//   final Color primaryTeal = const Color(0xFF537D82);
+// --- CHAT PAGE SCREEN ---
+class ChatPage extends StatefulWidget {
+  final String userName;
+  
+  const ChatPage({super.key, required this.userName});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         backgroundColor: primaryTeal,
-//         title: const Text("Community Feed", style: TextStyle(color: Colors.white)),
-//       ),
-//       body: ListView.builder(
-//         padding: const EdgeInsets.all(16),
-//         itemCount: 3,
-//         itemBuilder: (context, index) => Card(
-//           margin: const EdgeInsets.only(bottom: 12),
-//           child: Padding(
-//             padding: const EdgeInsets.all(16.0),
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 const Text("Book Review Post", style: TextStyle(fontWeight: FontWeight.bold)),
-//                 const SizedBox(height: 8),
-//                 const Text("This is a post from the community..."),
-//                 const SizedBox(height: 12),
-//                 Row(
-//                   mainAxisAlignment: MainAxisAlignment.end,
-//                   children: [
-//                     IconButton(icon: const Icon(Icons.chat_bubble_outline), onPressed: () {
-//                       // Logic to jump to the Chat tab
-//                     }),
-//                   ],
-//                 )
-//               ],
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  State<ChatPage> createState() => _ChatPageState();
+}
+
+class _ChatPageState extends State<ChatPage> {
+  final TextEditingController _messageController = TextEditingController();
+  final List<Map<String, dynamic>> _messages = [
+    {"text": "Hey! How are you?", "isSent": false, "timestamp": "10:30 AM"},
+    {"text": "I'm doing great! Just finished reading", "isSent": true, "timestamp": "10:31 AM"},
+    {"text": "Loved your review on The Midnight Library!", "isSent": false, "timestamp": "10:32 AM"},
+  ];
+
+  final Color primaryTeal = const Color(0xFF537D82);
+
+  @override
+  void dispose() {
+    _messageController.dispose();
+    super.dispose();
+  }
+
+  void _sendMessage() {
+    if (_messageController.text.trim().isNotEmpty) {
+      setState(() {
+        _messages.add({
+          "text": _messageController.text,
+          "isSent": true,
+          "timestamp": "now",
+        });
+        _messageController.clear();
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: primaryTeal,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: Text(
+          widget.userName,
+          style: const TextStyle(color: Colors.white, fontSize: 18),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.call, color: Colors.white),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.info_outline, color: Colors.white),
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          // Messages Display Area
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              itemCount: _messages.length,
+              itemBuilder: (context, index) {
+                final message = _messages[index];
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: Align(
+                    alignment: message["isSent"] ? Alignment.centerRight : Alignment.centerLeft,
+                    child: Container(
+                      constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width * 0.7,
+                      ),
+                      decoration: BoxDecoration(
+                        color: message["isSent"]
+                            ? primaryTeal
+                            : Colors.grey[300],
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                      child: Column(
+                        crossAxisAlignment: message["isSent"]
+                            ? CrossAxisAlignment.end
+                            : CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            message["text"],
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: message["isSent"] ? Colors.white : Colors.black,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            message["timestamp"],
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: message["isSent"]
+                                  ? Colors.white70
+                                  : Colors.grey[600],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          // Message Input Area
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border(
+                top: BorderSide(color: Colors.grey[200]!),
+              ),
+            ),
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.add_circle_outline, color: Color(0xFF537D82)),
+                ),
+                Expanded(
+                  child: TextField(
+                    controller: _messageController,
+                    decoration: InputDecoration(
+                      hintText: "Type a message...",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25),
+                        borderSide: BorderSide.none,
+                      ),
+                      filled: true,
+                      fillColor: Colors.grey[100],
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                    ),
+                    textInputAction: TextInputAction.send,
+                    onSubmitted: (_) => _sendMessage(),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                IconButton(
+                  onPressed: _sendMessage,
+                  icon: const Icon(Icons.send, color: Color(0xFF537D82)),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
