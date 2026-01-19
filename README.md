@@ -194,6 +194,8 @@ Fields:
 </figure>
 
 4. Community and Chat
+   <img width="860" height="1864" alt="image" src="https://github.com/user-attachments/assets/0b4ab76e-5322-41ab-82cb-d5bcaf593e40" />
+
    
 ## Summary of achieved features
 ## Technical explanation
