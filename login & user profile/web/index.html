@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biblioo</title>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+  
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCpI1JSpL0UAW0vUrHWpGDlZeMXiQPx4As",
+      authDomain: "biblioo-445fe.firebaseapp.com",
+      projectId: "biblioo-445fe",
+      storageBucket: "biblioo-445fe.firebasestorage.app",
+      messagingSenderId: "567436199586",
+      appId: "1:567436199586:web:dd46aa000035a602ed79fb"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
