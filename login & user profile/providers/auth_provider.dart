@@ -189,17 +189,11 @@ class AuthProvider extends ChangeNotifier {
 
   // Sign out
   Future<void> signOut() async {
-    _isLoading = true;
-    notifyListeners();
-
     try {
       await _authService.signOut();
-      _currentUser = null;
-      _isLoading = false;
-      notifyListeners();
+      // DO NOT modify _currentUser here
     } catch (e) {
       _errorMessage = e.toString();
-      _isLoading = false;
       notifyListeners();
     }
   }
