@@ -186,25 +186,64 @@ Fields:
 </figure>
 
 <figure>
-<img src="images/final screens/marketplace/detail_book.jpg" width="30%" alt="Homescreen"/>
+<img src="images/final screens/marketplace/detail_book.jpg" width="30%" alt="Book Details"/>
   <figcaption>Book Details</figcaption>
 </figure>
 
 <figure>
-<img src="images/final screens/marketplace/edit_book.jpg" width="30%" alt="Homescreen"/>
+<img src="images/final screens/marketplace/edit_book.jpg" width="30%" alt="Edit Books"/>
   <figcaption>Edit Book Details</figcaption>
 </figure>
 
 <figure>
-<img src="images/final screens/marketplace/add_book.jpg" width="30%" alt="Homescreen"/>
+<img src="images/final screens/marketplace/add_book.jpg" width="30%" alt="Add books"/>
   <figcaption>Add New Book</figcaption>
 </figure>
 
-4. Community and Chat
+4. Community and Chat <br>
    <img width="30%" alt="image" src="https://github.com/user-attachments/assets/0b4ab76e-5322-41ab-82cb-d5bcaf593e40" />
 
    
 ## Summary of achieved features
+The following core features have been successfully implemented and integrated into the Biblioo mobile application:
+- **User Authentication and Profiles**
+  <br> Users can register and log in using email or Google sign-in. Each user has a personalised profile with a username, bio, and profile picture.
+- **Dynamic Book Marketplace**
+<br> A real-time marketplace allows users to browse available books, search by title, and filter listings by categories such as Fiction, Textbooks, and Sci-Fi.
+- **Seller Listing Management**
+  <br>Users can list books for sale by providing images, descriptions, prices, and condition details. Sellers are able to edit and manage their own listings.
+- **Interactive Book Details**
+  <br>Each book includes a detailed view with high-quality images. Pinch-to-zoom functionality is provided through an interactive image viewer.
+- **Social and Community Features**
+  <br>The application includes an “Upcoming Events” section and a chat list interface to support communication between buyers and sellers.
+- **Wishlist and Personal Tracking**
+  <br>Users can save favourite books to a wishlist and view their active sales through a “My Listings” section.
+
 ## Technical explanation
+Biblioo is developed using a modern mobile application architecture that supports real-time data updates and cross-platform deployment.
+- **Frontend Framework**
+<br> The application is built using Flutter and Dart. Responsive layouts are handled using LayoutBuilder and orientation-based logic to support different screen sizes.
+- **State Management**
+<br> The Provider pattern is used to manage authentication state and shared application data consistently across screens.
+- **Backend and Database**
+<br> Firebase services are used as the backend solution. Firebase Authentication handles secure user login, while Cloud Firestore is used for storing book listings and user-related data.
+- **Image Handling**
+<br> Book listing images are hosted using the ImgBB API, while Firebase Storage is used for managing user profile images.
+- **Asynchronous and Real-Time Updates**
+<br> StreamBuilder is used to enable real-time updates for book listings and notifications, ensuring that users always see the most recent data.
+
 ## Limitations and future enhancements
+### Known Limitations
+- Events section is static and does not support user registration
+- Chat feature is currently UI-based and not connected to a real-time backend
+- Some event images are stored locally instead of being dynamically loaded
+- Certain Firestore queries require manual index creation
+
+### Future Enhancements
+- Real-time chat with push notifications
+- In-app payment integration
+- Dynamic event posting and RSVP functionality
+- Expanded social features such as reviews and follower systems
+- Advanced filters including price range and location-based search
+  
 ## References
