@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
   final String userId;
+  final String username;
   final String name;
   final String email;
   final String? profileImageUrl;
@@ -12,6 +13,7 @@ class UserModel {
 
   UserModel({
     required this.userId,
+    required this.username,
     required this.name,
     required this.email,
     this.profileImageUrl,
@@ -25,6 +27,7 @@ class UserModel {
   Map<String, dynamic> toMap() {
     return {
       'userId': userId,
+      'username': username,
       'name': name,
       'email': email,
       'profileImageUrl': profileImageUrl,
@@ -39,6 +42,7 @@ class UserModel {
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       userId: map['userId'] ?? '',
+      username: map['username'] ?? '',
       name: map['name'] ?? '',
       email: map['email'] ?? '',
       profileImageUrl: map['profileImageUrl'],
@@ -58,6 +62,7 @@ class UserModel {
   // Create a copy with updated fields
   UserModel copyWith({
     String? userId,
+    String? username,
     String? name,
     String? email,
     String? profileImageUrl,
@@ -68,6 +73,7 @@ class UserModel {
   }) {
     return UserModel(
       userId: userId ?? this.userId,
+      username: username ?? this.username,
       name: name ?? this.name,
       email: email ?? this.email,
       profileImageUrl: profileImageUrl ?? this.profileImageUrl,
