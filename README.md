@@ -173,7 +173,11 @@ Fields:
 - createdAt (Timestamp)
 ## Flowchart/ Sequence Diagram
 ## Final UI Screenshots
-1. Profile
+1. Profile <br>
+<figure>
+<img src="images/profile_final.png" width="30%" alt="Homescreen"/>
+   <figcaption>User profile screen</figcaption>
+</figure>
 2. Marketplace <br>
 <figure>
 <img src="images/final screens/marketplace/Mkt_homescreen.jpg" width="30%" alt="Homescreen"/>
