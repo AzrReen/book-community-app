@@ -40,7 +40,7 @@ class UpcomingEventsScreen extends StatelessWidget {
             title: "Book Launch – In Safe Hands",
             time: "02:00 PM – 04:00 PM",
             location: "MPH TRX",
-            imagePath: 'https://via.placeholder.com/300x150', // Replace with your asset
+            imagePath: 'assets/image/MPH-Event-Book-Launch-In-Safe-Hands.jpg', 
           ),
           const SizedBox(height: 16),
           _buildEventCard(
@@ -48,7 +48,7 @@ class UpcomingEventsScreen extends StatelessWidget {
             title: "The Dance Of Life by Dr. Wong Keh Shin",
             time: "02:00 PM – 04:00 PM",
             location: "MPH TRX",
-            imagePath: 'https://via.placeholder.com/300x150', // Replace with your asset
+            imagePath: 'assets/image/MPH-THE-DANCE-OF-LIFE-BY-DR-WONG-KEH-SHIN.jpg', 
           ),
         ],
       ),
