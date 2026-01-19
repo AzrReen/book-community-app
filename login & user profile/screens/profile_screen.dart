@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:file_picker/file_picker.dart';
+import 'dart:io';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import '../providers/auth_provider.dart';
 import 'edit_profile_screen.dart';
+
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -13,6 +15,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
+        automaticallyImplyLeading: false,
         actions: [
           PopupMenuButton<String>(
             onSelected: (value) {
@@ -95,11 +98,12 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 
-                // Email
+                // Username
                 Text(
-                  user.email,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.grey[600],
+                  '@${user.username}',
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.w500,
                       ),
                 ),
                 const SizedBox(height: 24),
@@ -281,19 +285,11 @@ class ProfileScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              leading: const Icon(Icons.photo_camera),
-              title: const Text('Take Photo'),
-              onTap: () {
-                Navigator.pop(context);
-                _pickImage(context, ImageSource.camera);
-              },
-            ),
-            ListTile(
               leading: const Icon(Icons.photo_library),
               title: const Text('Choose from Gallery'),
               onTap: () {
                 Navigator.pop(context);
-                _pickImage(context, ImageSource.gallery);
+                _pickImage(context);
               },
             ),
             if (context.read<AuthProvider>().currentUser?.profileImageUrl != null)
@@ -311,45 +307,63 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _pickImage(BuildContext context, ImageSource source) async {
+  Future<void> _pickImage(BuildContext context) async {
     try {
-      final ImagePicker picker = ImagePicker();
-      final XFile? image = await picker.pickImage(
-        source: source,
-        maxWidth: 1024,
-        maxHeight: 1024,
-        imageQuality: 85,
+      // Use file_picker instead of image_picker for better Windows support
+      final result = await FilePicker.platform.pickFiles(
+        type: FileType.image,
+        allowMultiple: false,
       );
 
-      if (image != null) {
-        final authProvider = context.read<AuthProvider>();
-        
-        dynamic imageFile;
-        if (kIsWeb) {
-          imageFile = await image.readAsBytes();
-        } else {
-          // For mobile (though not used in your case)
-          imageFile = image;
-        }
+      if (result == null || result.files.isEmpty) return;
 
-        final success = await authProvider.updateProfile(profileImage: imageFile);
+      if (!context.mounted) return;
 
-        if (!context.mounted) return;
+      // Show loading
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
 
-        if (success) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Profile picture updated!')),
-          );
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(authProvider.errorMessage ?? 'Failed to update picture'),
-              backgroundColor: Colors.red,
-            ),
-          );
-        }
+      final authProvider = context.read<AuthProvider>();
+      
+      dynamic imageFile;
+      if (kIsWeb) {
+        imageFile = result.files.first.bytes;
+      } else {
+        // For desktop/mobile - read the file bytes
+        final file = File(result.files.first.path!);
+        imageFile = await file.readAsBytes();
+      }
+
+      final success = await authProvider.updateProfile(profileImage: imageFile);
+
+      if (!context.mounted) return;
+
+      // Close loading dialog
+      Navigator.pop(context);
+
+      if (success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Profile picture updated!')),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(authProvider.errorMessage ?? 'Failed to update picture'),
+            backgroundColor: Colors.red,
+          ),
+        );
       }
     } catch (e) {
+      if (!context.mounted) return;
+      
+      // Close loading dialog if open
+      Navigator.of(context, rootNavigator: true).pop();
+      
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Error: $e'),
@@ -369,18 +383,19 @@ class ProfileScreen extends StatelessWidget {
   void _showLogoutDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (dialogContext) => AlertDialog(
         title: const Text('Logout'),
         content: const Text('Are you sure you want to logout?'),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.pop(dialogContext),
             child: const Text('Cancel'),
           ),
           TextButton(
-            onPressed: () {
-              context.read<AuthProvider>().signOut();
-              Navigator.pop(context);
+            onPressed: () async {
+              Navigator.pop(dialogContext); // Close dialog
+              await context.read<AuthProvider>().signOut();
+              // Navigation is handled by AuthWrapper in main.dart
             },
             child: const Text('Logout'),
           ),
