@@ -55,7 +55,7 @@ The application is suitable for users who prefer a mobile-based solution that co
 2. Book Marketplace Screen <br>
    ![Marketplace Homescreen](images/mktPlace.png)
 4. Community Screen <br>
-5. <img width="860" height="1864" alt="image" src="https://github.com/user-attachments/assets/de104fc2-4e19-4e08-bc49-9e485c41605f" />
+5. <img width="30%" alt="image" src="https://github.com/user-attachments/assets/de104fc2-4e19-4e08-bc49-9e485c41605f" />
 
    
 ## Architecture / Technical Design
