@@ -50,7 +50,8 @@ The application is suitable for users who prefer a mobile-based solution that co
 - Push Notifications: Alerts for new messages, price drops on wishlisted books, or social interactions (Cloud Messaging).
 
 ## UI Mockup
-1. User Profile Screen
+1. User Profile Screen<br>
+![User Profile screen].(images/user_profile.png).
 2. Book Marketplace Screen <br>
    ![Marketplace Homescreen](images/mktPlace.png)
 4. Community Screen
