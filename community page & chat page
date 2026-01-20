@@ -37,10 +37,18 @@ class UpcomingEventsScreen extends StatelessWidget {
         children: [
           _buildEventCard(
             context,
-            title: "Book Launch – In Safe Hands",
-            time: "02:00 PM – 04:00 PM",
+            title: "School Tour 2026 Malaysia Bookfest",
+            time: "09:00 AM – 04:00 PM",
+            location: "KLCC",
+            imagePath: 'assets/image/event1.webp', 
+          ),
+          const SizedBox(height: 16),
+          _buildEventCard(
+            context,
+            title: "Book Launch - In Safe Hands",
+            time: "02:00 PM - 04:00 PM",
             location: "MPH TRX",
-            imagePath: 'assets/image/MPH-Event-Book-Launch-In-Safe-Hands.jpg', 
+            imagePath: 'assets/image/event2.jpg', 
           ),
           const SizedBox(height: 16),
           _buildEventCard(
@@ -48,7 +56,7 @@ class UpcomingEventsScreen extends StatelessWidget {
             title: "The Dance Of Life by Dr. Wong Keh Shin",
             time: "02:00 PM – 04:00 PM",
             location: "MPH TRX",
-            imagePath: 'assets/image/MPH-THE-DANCE-OF-LIFE-BY-DR-WONG-KEH-SHIN.jpg', 
+            imagePath: 'assets/image/event3.jpg', 
           ),
         ],
       ),
